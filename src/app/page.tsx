@@ -21,6 +21,7 @@ const Page = () => {
   const [name, setName] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const weatherStackAPI = process.env.NEXT_PUBLIC_WEATHERSTACK_API
 
   const handleGetWeather = async () => {
     if (!name.trim()) return;
@@ -30,7 +31,7 @@ const Page = () => {
 
     try {
       const response = await axios.get<weatherObj>(
-        `http://api.weatherstack.com/current?access_key=1430a687a6045a68ea70a33a93f292dc&query=${name}`
+        `http://api.weatherstack.com/current?access_key=${weatherStackAPI}&query=${name}`
       );
       setWeatherAbout(response.data);
     } catch (err) {
